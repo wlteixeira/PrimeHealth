@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'usuarios',
+    'sintomas',
+    'sinais_vitais',
+    'medicamentos',
+    'dashboard',
+    'relatorios',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +82,7 @@ WSGI_APPLICATION = 'primehealth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'banco_dados.sqlite3',
     }
 }
 
