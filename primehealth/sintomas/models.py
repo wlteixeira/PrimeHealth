@@ -2,18 +2,23 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Sintoma(models.Model):
+
+    INTENSIDADES = [
+        ('Leve', 'Leve'),
+        ('Moderado', 'Moderado'),
+        ('Grave', 'Grave'),
+    ]
+
     usuario = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
-        related_name='sintomas'
+        on_delete=models.CASCADE
     )
-    descricao = models.CharField(
-        max_length=255,
-        verbose_name='Descrição'
+    nome = models.CharField(max_length=100)
+    intensidade = models.CharField(
+        max_length=10,
+        choices=INTENSIDADES
     )
-    data_registro = models.DateField(
-        verbose_name='Data do Registro'
-    )
+    data_hora = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.descricao} ({self.usuario.username})'
+        return f'{self.nome} ({self.intensidade})'

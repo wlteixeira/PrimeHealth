@@ -3,25 +3,26 @@
 {% block conteudo %}
 <h2>Sinais Vitais</h2>
 
-<a href="{% url 'cadastrar_sinal_vital' %}">Cadastrar</a>
+<a href="{% url 'criar_sinal_vital' %}">Cadastrar</a>
 
 <table>
     <tr>
-        <th>Pressão</th>
-        <th>Glicemia</th>
-        <th>Peso</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Data e Hora</th>
         <th>Ações</th>
     </tr>
     {% for sinal in sinais %}
     <tr>
-        <td>{{ sinal.pressao_arterial }}</td>
-        <td>{{ sinal.glicemia }}</td>
-        <td>{{ sinal.peso }}</td>
+        <td>{{ sinal.get_tipo_display }}</td>
+        <td>{{ sinal.valor }}</td>
+        <td>{{ sinal.data_hora|date:"d/m/Y H:i" }}</td>
         <td>
-            <a href="{% url 'editar_sinal_vital' sinal.id %}">Editar</a>
-            <a href="{% url 'excluir_sinal_vital' sinal.id %}">Excluir</a>
-        </td>
-    </tr>
-    {% endfor %}
+        <a href="{% url 'editar_sinal_vital' sinal.id %}" class="btn btn-warning btn-sm">Editar</a>
+        <a href="{% url 'excluir_sinal_vital' sinal.id %}" class="btn btn-danger btn-sm">Excluir</a>
+    </td>
+</tr>
+{% endfor %}
+
 </table>
 {% endblock %}

@@ -2,22 +2,24 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class SinalVital(models.Model):
+
+    TIPOS = [
+        ('Pressão Arterial', 'Pressão Arterial'),
+        ('Frequência Cardíaca', 'Frequência Cardíaca'),
+        ('Temperatura', 'Temperatura'),
+        ('Saturação', 'Saturação'),
+    ]
+
     usuario = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
-        related_name='sinais_vitais'
+        on_delete=models.CASCADE
     )
     tipo = models.CharField(
-        max_length=100,
-        verbose_name='Tipo'
+        max_length=30,
+        choices=TIPOS
     )
-    valor = models.CharField(
-        max_length=50,
-        verbose_name='Valor'
-    )
-    data_registro = models.DateField(
-        verbose_name='Data do Registro'
-    )
+    valor = models.CharField(max_length=20)
+    data_hora = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.tipo}: {self.valor}'
+        return f'{self.tipo} - {self.valor}'

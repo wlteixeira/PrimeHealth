@@ -1,28 +1,19 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Sintoma
 from .forms import SintomaForm
+
 
 @login_required
 def listar_sintomas(request):
     sintomas = Sintoma.objects.filter(usuario=request.user)
-
-    itens = [{
-        'campos': [s.descricao, s.data_registro],
-        'url_editar': f'/sintomas/editar/{s.id}/',
-        'url_excluir': f'/sintomas/excluir/{s.id}/'
-    } for s in sintomas]
-
-    return render(request, 'listar_padrao.html', {
-        'titulo': 'Sintomas',
-        'cabecalhos': ['Descrição', 'Data'],
-        'itens': itens,
-        'url_novo': '/sintomas/novo/'
+    return render(request, 'listar_sintomas.html', {
+        'sintomas': sintomas
     })
 
 
 @login_required
-def cadastrar_sintoma(request):
+def criar_sintoma(request):
     formulario = SintomaForm(request.POST or None)
 
     if formulario.is_valid():
@@ -63,5 +54,6 @@ def excluir_sintoma(request, id):
         return redirect('/sintomas/')
 
     return render(request, 'confirmar_exclusao.html', {
+        'objeto': sintoma,
         'url_voltar': '/sintomas/'
     })

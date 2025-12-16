@@ -3,7 +3,7 @@
 {% block conteudo %}
 <h2>Lista de Sintomas</h2>
 
-<a href="{% url 'cadastrar_sintoma' %}" class="btn btn-primary mb-3">
+<a href="{% url 'criar_sintoma' %}" class="btn btn-primary mb-3">
     Novo Sintoma
 </a>
 
@@ -18,13 +18,15 @@
     <tbody>
         {% for sintoma in sintomas %}
         <tr>
-            <td>{{ sintoma.descricao }}</td>
-            <td>{{ sintoma.data_registro }}</td>
-            <td>
-                <a href="{% url 'editar_sintoma' sintoma.id %}" class="btn btn-warning btn-sm">Editar</a>
-                <a href="{% url 'excluir_sintoma' sintoma.id %}" class="btn btn-danger btn-sm">Excluir</a>
-            </td>
-        </tr>
+    <td>{{ sintoma.nome }}</td>
+    <td>{{ sintoma.intensidade }}</td>
+    <td>{{ sintoma.data_hora|date:"d/m/Y H:i" }}</td>
+    <td>
+        <a href="/sintomas/editar/{{ sintoma.id }}/" class="btn btn-sm btn-warning">Editar</a>
+        <a href="/sintomas/excluir/{{ sintoma.id }}/" class="btn btn-sm btn-danger">Excluir</a>
+    </td>
+</tr>
+
         {% empty %}
         <tr>
             <td colspan="3" class="text-center text-muted">

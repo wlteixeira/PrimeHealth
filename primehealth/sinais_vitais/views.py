@@ -1,28 +1,19 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import SinalVital
 from .forms import SinalVitalForm
+
 
 @login_required
 def listar_sinais_vitais(request):
     sinais = SinalVital.objects.filter(usuario=request.user)
-
-    itens = [{
-        'campos': [s.tipo, s.valor, s.data_registro],
-        'url_editar': f'/sinais-vitais/editar/{s.id}/',
-        'url_excluir': f'/sinais-vitais/excluir/{s.id}/'
-    } for s in sinais]
-
-    return render(request, 'listar_padrao.html', {
-        'titulo': 'Sinais Vitais',
-        'cabecalhos': ['Tipo', 'Valor', 'Data'],
-        'itens': itens,
-        'url_novo': '/sinais-vitais/novo/'
+    return render(request, 'listar_sinais.html', {
+        'sinais': sinais
     })
 
 
 @login_required
-def cadastrar_sinal_vital(request):
+def criar_sinal_vital(request):
     formulario = SinalVitalForm(request.POST or None)
 
     if formulario.is_valid():
@@ -63,5 +54,6 @@ def excluir_sinal_vital(request, id):
         return redirect('/sinais-vitais/')
 
     return render(request, 'confirmar_exclusao.html', {
+        'objeto': sinal,
         'url_voltar': '/sinais-vitais/'
     })
