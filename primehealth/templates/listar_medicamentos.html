@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2>Medicamentos</h2>
+
+<a href="{% url 'cadastrar_medicamento' %}">Cadastrar</a>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Dosagem</th>
+        <th>Horário</th>
+        <th>Ações</th>
+    </tr>
+    {% for medicamento in medicamentos %}
+    <tr>
+        <td>{{ medicamento.nome }}</td>
+        <td>{{ medicamento.dosagem }}</td>
+        <td>{{ medicamento.horario }}</td>
+        <td>
+            <a href="{% url 'editar_medicamento' medicamento.id %}">Editar</a>
+            <a href="{% url 'excluir_medicamento' medicamento.id %}">Excluir</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

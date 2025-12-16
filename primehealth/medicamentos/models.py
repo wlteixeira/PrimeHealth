@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
 class Medicamento(models.Model):
@@ -8,15 +7,17 @@ class Medicamento(models.Model):
         on_delete=models.CASCADE,
         related_name='medicamentos'
     )
-    nome = models.CharField(max_length=100)
-    dosagem = models.CharField(max_length=50)
-    horario = models.TimeField(null=True, blank=True)
-
-    def clean(self):
-        if not self.horario:
-            raise ValidationError(
-                'É obrigatório definir um horário para o medicamento.'
-            )
+    nome = models.CharField(
+        max_length=100,
+        verbose_name='Nome'
+    )
+    dosagem = models.CharField(
+        max_length=50,
+        verbose_name='Dosagem'
+    )
+    horario = models.TimeField(
+        verbose_name='Horário'
+    )
 
     def __str__(self):
-        return f"{self.nome} - {self.dosagem}"
+        return f'{self.nome} - {self.dosagem}'

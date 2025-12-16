@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2 class="mb-4">Painel de Saúde</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header bg-success text-white">
+                Sintomas
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for sintoma in sintomas %}
+                    <li class="list-group-item">
+                        {{ sintoma.descricao }} - {{ sintoma.data_registro }}
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">
+                        Nenhum sintoma registrado
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                Sinais Vitais
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for sinal in sinais_vitais %}
+                    <li class="list-group-item">
+                        {{ sinal.tipo }}: {{ sinal.valor }}
+                    </li>
+                {% empty %}
+                    <li class="list-group-item text-muted">
+                        Nenhum sinal vital registrado
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

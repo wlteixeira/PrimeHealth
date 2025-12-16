@@ -7,11 +7,17 @@ class SinalVital(models.Model):
         on_delete=models.CASCADE,
         related_name='sinais_vitais'
     )
-    pressao_arterial = models.CharField(max_length=7)
-    glicemia = models.FloatField()
-    peso = models.FloatField()
-    frequencia_cardiaca = models.IntegerField()
-    data_registro = models.DateTimeField(auto_now_add=True)
+    tipo = models.CharField(
+        max_length=100,
+        verbose_name='Tipo'
+    )
+    valor = models.CharField(
+        max_length=50,
+        verbose_name='Valor'
+    )
+    data_registro = models.DateField(
+        verbose_name='Data do Registro'
+    )
 
     def __str__(self):
-        return f"Sinais Vitais - {self.usuario.username}"
+        return f'{self.tipo}: {self.valor}'

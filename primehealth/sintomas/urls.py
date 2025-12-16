@@ -1,9 +1,14 @@
 from django.urls import path
-from . import views
+from .views import (
+    listar_sintomas,
+    cadastrar_sintoma,
+    editar_sintoma,
+    excluir_sintoma
+)
 
 urlpatterns = [
-    path('', views.listar_sintomas, name='listar_sintomas'),
-    path('cadastrar/', views.cadastrar_sintoma, name='cadastrar_sintoma'),
-    path('editar/<int:id>/', views.editar_sintoma, name='editar_sintoma'),
-    path('excluir/<int:id>/', views.excluir_sintoma, name='excluir_sintoma'),
+    path('', listar_sintomas, name='listar_sintomas'),
+    path('novo/', cadastrar_sintoma, name='cadastrar_sintoma'),
+    path('editar/<int:id>/', editar_sintoma, name='editar_sintoma'),
+    path('excluir/<int:id>/', excluir_sintoma, name='excluir_sintoma'),
 ]

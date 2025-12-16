@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<h2>Confirmar Exclusão</h2>
+
+<div class="alert alert-danger">
+    Tem certeza que deseja excluir este registro?
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a href="{{ url_voltar }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
